@@ -9,7 +9,7 @@ using ClientAccount_Onion_EF_WebApi.Mappers;
 
 namespace ClientAccount_Onion_EF_WebApi.Controllers
 {
-    //[RoutePrefix("client")]
+    [RoutePrefix("api/client")]
     public class ClientController : ApiController
     {
         private readonly IClient clientService;
@@ -19,9 +19,7 @@ namespace ClientAccount_Onion_EF_WebApi.Controllers
         }
 
         // GET api/<controller>
-        [HttpGet]
-        //[Route("")]
-        //[Route(""), HttpGet]
+        [Route(""), HttpGet]
         public IList<ClientView> GetAll()
         {
             return clientService.GetAll()
@@ -30,9 +28,7 @@ namespace ClientAccount_Onion_EF_WebApi.Controllers
         }
 
         // GET api/<controller>/5
-        [HttpGet]
-        //[Route("{id:int}")]
-        //[Route("{id}"), HttpGet]
+        [Route("{id:int}"), HttpGet]
         public ClientView Get([FromUri]int id)
         {
             var temp = clientService.Get(id).ClientFromDomainToView();
@@ -42,25 +38,21 @@ namespace ClientAccount_Onion_EF_WebApi.Controllers
         }
 
         // POST api/<controller>
-        [HttpPost]
-        //[Route("")]
+        [Route(""), HttpPost]
         public void Create([FromBody]ClientView inst)
         {
             clientService.Create(inst.ClientFromViewToDomain());
         }
 
         // PUT api/<controller>
-        [HttpPut]
-        //[Route("")]
+        [Route(""), HttpPut]
         public void Update([FromBody]ClientView inst)
         {
             clientService.Update(inst.ClientFromViewToDomain());
         }
 
         // DELETE api/<controller>/5
-        [HttpDelete]
-        //[Route("{id:int}")]
-        //[Route("{id:int}"), HttpDelete]
+        [Route("{id:int}"), HttpDelete]
         public void Delete([FromUri]int id)
         {
             clientService.Delete(id);
